@@ -50,7 +50,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                   objectFit="cover"
                 />
                 <div className={styles.episodeDetails}>
-                  <Link href={`/episodes/${episode.id}`}>
+                  <Link href={`/episodes/v1/${episode.id}`}>
                     <a>{episode.title}</a>
                   </Link>
                   <p>{episode.members}</p>
@@ -98,7 +98,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                   </td>
 
                   <td>
-                    <Link href={`/episodes/${ep.id}`}>
+                    <Link href={`/episodes/v1/${ep.id}`}>
                       <a>{ep.title}</a>
                     </Link>
                   </td>
@@ -126,8 +126,8 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get("episodes");
-  const episodes = data.episodes.map((episode) => {
+  const { data } = await api.get("episodes/v1");
+  const episodes = data.map((episode) => {
     return {
       id: episode.id,
       title: episode.title,

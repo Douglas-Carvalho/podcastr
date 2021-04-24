@@ -69,9 +69,9 @@ export default function Episode({ episode }: EpisodeProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await api.get("episodes");
+  const { data } = await api.get("episodes/v1");
 
-  const paths = data.episodes.map((ep) => {
+  const paths = data.map((ep) => {
     return {
       params: {
         slug: ep.id,
@@ -87,7 +87,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params;
-  const { data } = await api.get(`/episodes/1`);
+  const { data } = await api.get(`episodes/v1/${slug}`);
+
+  console.log(data);
 
   const episode = {
     id: data.id,
