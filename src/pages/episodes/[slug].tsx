@@ -81,15 +81,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params;
   const { data } = await api.get(`episodes/v1/${slug}`);
-
-  console.log(data);
 
   const episode = {
     id: data.id,
